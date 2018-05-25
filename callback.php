@@ -20,6 +20,16 @@ $reply_token = $json_obj->{"events"}[0]->{"replyToken"};
 $space_ignored = str_replace(" ", "", $message->{"text"} );
 $exploded = explode(",", $space_ignored);
 
+$response_format_text = [
+    'type' => 'text',
+    'text' => 'testttt'
+];
+$post_data = [
+    "replyToken" => $reply_token,
+    "messages" => $response_format_text
+];
+//send
+curl($post_data, $access_token);
 
 //CSVデータを読み込む
 $csv_filepath = 'list.csv';
