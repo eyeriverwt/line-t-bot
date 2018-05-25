@@ -15,7 +15,7 @@ $message = $json_obj->{"events"}[0]->{"message"};
 $reply_token = $json_obj->{"events"}[0]->{"replyToken"};
 
 // group_idの取得
-//$group_id =  $source->{"groupId"};
+$group_id =  $source->{"groupId"};
 
 $space_ignored = str_replace(" ", "", $message->{"text"} );
 $exploded = explode(",", $space_ignored);
