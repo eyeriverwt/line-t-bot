@@ -34,6 +34,7 @@ foreach ((array)$data['list'] as $key => $value) {
     if ($value[1] == $message->{"text"}) {
         $bottext = $value[0] ."の技で" .$value[2] ."です。";
     }
+    $bottext = $value;
 }
 
 $response_format_text = [
