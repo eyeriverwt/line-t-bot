@@ -21,30 +21,20 @@ $space_ignored = str_replace(" ", "", $message->{"text"} );
 $exploded = explode(",", $space_ignored);
 
 
-// 送られてきたメッセージの中身からレスポンスのタイプを選択
-if ($message->{"text"} == 'ボルトライナー') {
-    $response_format_text = [
-        'type' => 'text',
-        //'text' => $message->{"text"}
-        'text' => 'ちょっとわかんないです...'
-    ];
-}else {
-
-    // それ以外は送られてきたテキストをオウム返し
-    $response_format_text = [
-        'type' => 'text',
-        'text' => $message->{"text"}
-    ];
-}
-
-
+$response_format_text = [
+    'type' => 'text',
+    'text' => 'testttt'
+];
 
 $post_data = [
     "replyToken" => $reply_token,
-    "messages" => [$response_format_text]
+    "messages" => $response_format_text
 ];
-
+//send
 curl($post_data, $access_token);
+
+
+
 
 function curl($post_data, $access_token) {
     //curlを使用してメッセージを返信する
