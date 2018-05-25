@@ -31,32 +31,6 @@ $post_data = [
 //send
 curl($post_data, $access_token);
 
-//CSVデータを読み込む
-$csv_filepath = 'list.csv';
-try {
-    $data["list"] = array_csv($csv_filepath);
-} catch (Exception $e) {
-    echo "error：", $e->getMessage(), "\n";
-}
-
-//search
-foreach ((array)$data['list'] as $key => $value) {
-    if ($value[1] == $message->{"text"}) {
-        $bottext = $value[0] ."の技で" .$value[2] ."です。";
-    }
-    $bottext = $value;
-}
-
-$response_format_text = [
-    'type' => 'text',
-    'text' => $bottext
-];
-$post_data = [
-    "replyToken" => $reply_token,
-    "messages" => $response_format_text
-];
-//send
-curl($post_data, $access_token);
 
 
 //@return array $csv_data csv配列
