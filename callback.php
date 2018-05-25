@@ -21,48 +21,60 @@ $space_ignored = str_replace(" ", "", $message->{"text"} );
 $exploded = explode(",", $space_ignored);
 
 
-
-
-// 送られてきたメッセージの中身からレスポンスのタイプを選択
-if ($message->{"text"} == 'ボルトライナー') {
-    // 確認ダイアログタイプ
-    $response_format_text = [
-        'type' => 'template',
-        'altText' => '確認ダイアログ',
-        'template' => [
-            'type' => 'confirm',
-            'text' => 'ラースの技だね。どっちが知りたい？',
-            'actions' => [
-                [
-                    'type' => 'message',
-                    'label' => 'フレーム',
-                    'text' => '発生14'
-                ],
-                [
-                    'type' => 'message',
-                    'label' => 'コンボ',
-                    'text' => '知らん'
-                ],
-            ]
-        ]
-    ];
-} else {
-    // それ以外は送られてきたテキストをオウム返し
-    $response_format_text = [
-        'type' => 'text',
-        //'text' => $message->{"text"}
-        'text' => 'ちょっとわかんないです...'
-    ];
+//CSVデータを読み込む
+$csv_filepath = 'list.csv';
+try {
+    $data["list"] = array_csv($csv_filepath);
+} catch (Exception $e) {
+    echo "error：", $e->getMessage(), "\n";
 }
 
+//search
+foreach ((array)$data['list'] as $key => $value) {
+    if ($value[1] == $message->{"text"}) {
+        $bottext = $value[0] ."の技で" .$value[2] ."です。";
+    }
+}
 
-
+$response_format_text = [
+    'type' => 'text',
+    'text' => $bottext
+];
 $post_data = [
     "replyToken" => $reply_token,
     "messages" => [$response_format_text]
 ];
-
+//send
 curl($post_data, $access_token);
+
+
+//@return array $csv_data csv配列
+function array_csv($csv_filepath) {
+    //TODO エラー処理
+    setlocale(LC_ALL, 'ja_JP.UTF-8');
+    $handle = file_get_contents($csv_filepath);
+    //$handle = mb_convert_encoding($handle, 'UTF-8', 'sjis-win');
+    $temp = tmpfile();
+    $csv_data  = array();
+
+    fwrite($temp, $handle);
+    rewind($temp);
+    while (($handle = fgetcsv($temp, 0, ",")) !== false) {
+        $tmp_value = array();
+        foreach ($handle as $key1 => $value1) {
+            $tmp_value[] = trim ($value1);
+        }
+        $csv_data[] = $tmp_value;
+        //$tempstr[] = implode(",",$handle);//配列を区切り文字で文字列化
+    }
+    $message = ERR_CSV_EMPTY .$csv_filepath;
+    if(empty($csv_data)) {
+        throw new Exception($message);
+    }
+    return $csv_data;
+}
+
+
 
 function curl($post_data, $access_token) {
     //curlを使用してメッセージを返信する
