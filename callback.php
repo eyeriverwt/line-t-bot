@@ -1,5 +1,5 @@
 <?php
-//require_once dirname(__FILE__) . '/config.php';
+require_once dirname(__FILE__) . '/config.php';
 //require_once dirname(__FILE__) . '/response_format_text.php';
 //require_once dirname(__FILE__) . '/curl.php';
 //require_once dirname(__FILE__) . '/register.php';
@@ -15,17 +15,45 @@ $message = $json_obj->{"events"}[0]->{"message"};
 $reply_token = $json_obj->{"events"}[0]->{"replyToken"};
 
 // group_idの取得
-$group_id =  $source->{"groupId"};
+//$group_id =  $source->{"groupId"};
 
 $space_ignored = str_replace(" ", "", $message->{"text"} );
 $exploded = explode(",", $space_ignored);
 
-$access_token = '4TTcwP8p15f7nzWgUziMkI0XzqUZBtZE4AoIoyrdiMYyGHF6hF4p658x5LdMuFOxdFqnAs/vvtBsRNqhco8xDzquLSsWdOADJ1Y9AE3yYaQIDmany4AqgwQpEYXukHqqZxkpQmGGBJ7kDoC049aS3AdB04t89/1O/w1cDnyilFU=';
 
-$response_format_text = [
-    "type" => "text",
-    "text" => "おはよう！今日も１日頑張ってね〜！"
-];
+
+
+// 送られてきたメッセージの中身からレスポンスのタイプを選択
+if ($message->{"text"} == '確認') {
+    // 確認ダイアログタイプ
+    $response_format_text = [
+        'type' => 'template',
+        'altText' => '確認ダイアログ',
+        'template' => [
+            'type' => 'confirm',
+            'text' => '元気ですかー？',
+            'actions' => [
+                [
+                    'type' => 'message',
+                    'label' => '元気です',
+                    'text' => '元気です'
+                ],
+                [
+                    'type' => 'message',
+                    'label' => 'まあまあです',
+                    'text' => 'まあまあです'
+                ],
+            ]
+        ]
+    ];
+} else {
+    // それ以外は送られてきたテキストをオウム返し
+    $response_format_text = [
+        'type' => 'text',
+        'text' => $message->{"text"}
+    ];
+}
+
 
 
 $post_data = [
