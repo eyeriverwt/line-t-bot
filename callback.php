@@ -43,7 +43,7 @@ $response_format_text = [
 ];
 $post_data = [
     "replyToken" => $reply_token,
-    "messages" => [$response_format_text]
+    "messages" => $response_format_text
 ];
 //send
 curl($post_data, $access_token);
