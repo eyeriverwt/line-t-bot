@@ -21,37 +21,19 @@ $space_ignored = str_replace(" ", "", $message->{"text"} );
 $exploded = explode(",", $space_ignored);
 
 
-
-
 // 送られてきたメッセージの中身からレスポンスのタイプを選択
 if ($message->{"text"} == 'ボルトライナー') {
-    // 確認ダイアログタイプ
-    $response_format_text = [
-        'type' => 'template',
-        'altText' => '確認ダイアログ',
-        'template' => [
-            'type' => 'confirm',
-            'text' => 'ラースの技だね。どっちが知りたい？',
-            'actions' => [
-                [
-                    'type' => 'message',
-                    'label' => 'フレーム',
-                    'text' => '発生14'
-                ],
-                [
-                    'type' => 'message',
-                    'label' => 'コンボ',
-                    'text' => '知らん'
-                ],
-            ]
-        ]
-    ];
-} else {
-    // それ以外は送られてきたテキストをオウム返し
     $response_format_text = [
         'type' => 'text',
         //'text' => $message->{"text"}
         'text' => 'ちょっとわかんないです...'
+    ];
+}else {
+
+    // それ以外は送られてきたテキストをオウム返し
+    $response_format_text = [
+        'type' => 'text',
+        'text' => $message->{"text"}
     ];
 }
 
