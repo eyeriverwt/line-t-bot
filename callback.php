@@ -33,33 +33,6 @@ curl($post_data, $access_token);
 
 
 
-//@return array $csv_data csv配列
-function array_csv($csv_filepath) {
-    //TODO エラー処理
-    setlocale(LC_ALL, 'ja_JP.UTF-8');
-    $handle = file_get_contents($csv_filepath);
-    //$handle = mb_convert_encoding($handle, 'UTF-8', 'sjis-win');
-    $temp = tmpfile();
-    $csv_data  = array();
-
-    fwrite($temp, $handle);
-    rewind($temp);
-    while (($handle = fgetcsv($temp, 0, ",")) !== false) {
-        $tmp_value = array();
-        foreach ($handle as $key1 => $value1) {
-            $tmp_value[] = trim ($value1);
-        }
-        $csv_data[] = $tmp_value;
-        //$tempstr[] = implode(",",$handle);//配列を区切り文字で文字列化
-    }
-    $message = ERR_CSV_EMPTY .$csv_filepath;
-    if(empty($csv_data)) {
-        throw new Exception($message);
-    }
-    return $csv_data;
-}
-
-
 
 function curl($post_data, $access_token) {
     //curlを使用してメッセージを返信する
