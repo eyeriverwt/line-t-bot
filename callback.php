@@ -24,24 +24,24 @@ $exploded = explode(",", $space_ignored);
 
 
 // 送られてきたメッセージの中身からレスポンスのタイプを選択
-if ($message->{"text"} == '確認') {
+if ($message->{"text"} == 'ボルトライナー') {
     // 確認ダイアログタイプ
     $response_format_text = [
         'type' => 'template',
         'altText' => '確認ダイアログ',
         'template' => [
             'type' => 'confirm',
-            'text' => '元気ですかー？',
+            'text' => 'ラースの技だね。どっちが知りたい？',
             'actions' => [
                 [
                     'type' => 'message',
-                    'label' => '元気です',
-                    'text' => '元気です'
+                    'label' => 'フレーム',
+                    'text' => '発生14'
                 ],
                 [
                     'type' => 'message',
-                    'label' => 'まあまあです',
-                    'text' => 'まあまあです'
+                    'label' => 'コンボ',
+                    'text' => '知らん'
                 ],
             ]
         ]
@@ -50,7 +50,8 @@ if ($message->{"text"} == '確認') {
     // それ以外は送られてきたテキストをオウム返し
     $response_format_text = [
         'type' => 'text',
-        'text' => $message->{"text"}
+        //'text' => $message->{"text"}
+        'text' => 'ちょっとわかんないです...'
     ];
 }
 
