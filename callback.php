@@ -27,8 +27,8 @@ try {
     echo "error：", $e->getMessage(), "\n";
 }
 $cmd_flg = 0;
-$charactor = "";
-$input_text_format = "";
+$charactor = "test1";
+$input_text_format = "test2";
 $flg = 0;
 $bottext = "";
 
@@ -36,9 +36,12 @@ $bottext = "";
 if ((strpos($message->{"text"},'#')) !== false) {
     $input_text = explode("#", $message->{"text"});
     $charactor = $input_text[0];
+    /*
     $input_text_format = mb_convert_kana($input_text[1], 'as');
     $input_text_format = str_replace('、', '', $input_text_format);
     $input_text_format = str_replace(' ', '', $input_text_format);
+    */
+
 }
 /*
 // strpos で含まれている文字列の検出
@@ -101,11 +104,11 @@ if ((strpos($message->{"text"},'#')) !== false) {
     $response_format_text = [
         [
             "type" => "text",
-            "text" => $input_text[0]
+            "text" => $charactor
         ],
         [
             "type" => "text",
-            "text" => $input_text[1]
+            "text" => $input_text_format
         ]
     ];
 
