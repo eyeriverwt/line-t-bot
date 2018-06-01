@@ -28,9 +28,10 @@ try {
 }
 $cmd_flg = 0;
 $charactor = "";
-$input_text_format = "";
+$input_text_format = $message->{"text"};
 $flg = 0;
 $bottext = "";
+/*
 // strpos で含まれている文字列の検出
 if ((strpos($message->{"text"},'#')) !== false) {
     $input_text = explode("#", $message->{"text"});
@@ -57,7 +58,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
             break;
         }
     }
-/*
+
     // 送られてきたメッセージからレスポンスのタイプを選択
     if ($flg == 1) {
         $response_format_text = [
@@ -85,9 +86,9 @@ if ((strpos($message->{"text"},'#')) !== false) {
             "text" => "ちょっとわかんないです..."
         ]
     ];
-*/
-}
 
+}
+*/
     $response_format_text = [
         [
             "type" => "text",
