@@ -28,7 +28,7 @@ try {
 }
 $cmd_flg = 0;
 $charactor = "";
-$input_text_format = $message->{"text"};
+$input_text_format = "test";
 $flg = 0;
 $bottext = "";
 /*
