@@ -46,7 +46,6 @@ if ((strpos($message->{"text"},'#')) !== false) {
     //search
     foreach ((array)$data['list'] as $key => $value) {
         if (((strpos($charactor,$value[0])) !== false) & ((strpos($input_text_format,$value[1])) !== false)) {
-
              $bottext .= "【" .$value[0] ."】";
              $bottext .= "技名：" .$value[1] ."（" .$value[2] ."）";
              $bottext .= "コマンド：".$value[3] ."";
