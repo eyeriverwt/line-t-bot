@@ -57,20 +57,37 @@ if ($flg == 1) {
         'text' => 'ちょっとわかんないです3...'
     ];
 }
+$messages_format_text = [
+    [
+        "type" => "text",
+        "text" => "くん、誕生日おめでとう！"
+    ],
+    [
+        "type" => "sticker",
+        "packageId" => "1",
+        "stickerId" => "410"
+    ],
+    [
+        "type" => "sticker",
+        "packageId" => "4",
+        "stickerId" => "307"
+    ]
+];
+
 $post_data = [
     "replyToken" => $reply_token,
-    "messages" => [$response_format_text]
+    //"messages" => [$response_format_text]
+    "messages" => [$messages_format_text]
 ];
+
+
 $response_format_text2 = [
     'type' => 'text',
     'text' => '2行目のテキストです。'
 ];
-$post_data2 = [
-    "replyToken" => $reply_token,
-    "messages" => [$response_format_text2]
-];
+
 curl($post_data, $access_token);
-curl($post_data, $access_token);
+//curl($post_data, $access_token);
 
 push_message(
     [
@@ -90,7 +107,7 @@ push_message(
                 "packageId" => "4",
                 "stickerId" => "307"
             ]
-            ]
+        ]
     ]
 );
 
