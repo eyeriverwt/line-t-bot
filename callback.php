@@ -60,7 +60,7 @@ if ($flg == 1) {
 $messages_format_text2 = [
     [
         "type" => "text",
-        "text" => "くん、誕生日おめでとう！"
+        "text" => "誕生日おめでとう！"
     ],
     [
         "type" => "sticker",
