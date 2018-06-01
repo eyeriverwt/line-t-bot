@@ -26,37 +26,81 @@ try {
 } catch (Exception $e) {
     echo "error：", $e->getMessage(), "\n";
 }
-
-//search
+#cmd_flg = 0;
+$charactor = "";
+$input_text_format = "";
 $flg = 0;
-foreach ((array)$data['list'] as $key => $value) {
-    if ($value[1] == $message->{"text"}) {
-        $bottext = $value[0] ."の技で" .$value[2] ."です。";
-        $flg = 1;
-        break;
+$bottext = "";
+// strpos で含まれている文字列の検出
+if ((strpos($message->{"text"},'#')) !== false) {
+    $input_text = explode("#", $message->{"text"});
+    $charactor = $input_text[0];
+    $input_text_format = mb_convert_kana($input_text[1], 'as');
+    $input_text_format = str_replace(',', '', $input_text_format);
+    $input_text_format = str_replace('、', '', $input_text_format);
+    $input_text_format = str_replace(' ', '', $input_text_format);
+
+    //search
+    foreach ((array)$data['list'] as $key => $value) {
+        if ((strpos($charactor,$value[0])) !== false) {
+            $bottext .= "【" .$value[0] ."】\n";
+            $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
+            $bottext .= "コマンド：".$value[3] ."\n";
+            $bottext .= "判定：".$value[4] ."\n";
+            $bottext .= "ダメージ：".$value[4] ."\n";
+            $bottext .= "発生：".$value[4] ."\n";
+            $bottext .= "ガード：".$value[4] ."\n";
+            $bottext .= "";
+            $bottext .= "";
+            $bottext .= "です。";
+            $flg = 1;
+            break;
+        }
     }
+
+    // 送られてきたメッセージからレスポンスのタイプを選択
+    if ($flg == 1) {
+        $response_format_text = [
+            'type' => 'text',
+            'text' => $bottext
+        ];
+    } elseif($message->{"text"} == 'スタンプ'){
+        $response_format_text = [
+            'type' => 'sticker',
+            'packageId' => 2,
+            'stickerId' => 1
+        ];
+    }else{
+        // それ以外は送られてきたテキストをオウム返し
+        $response_format_text = [
+            'type' => 'text',
+            //'text' => $message->{"text"}
+            'text' => 'ちょっとわかんないです＞＜...'
+        ];
+    }
+}else{
+    $response_format_text = [
+        [
+            "type" => "text",
+            "text" => "ちょっとわかんないです..."
+        ]
+    ];
 }
 
-// 送られてきたメッセージからレスポンスのタイプを選択
-if ($flg == 1) {
-    $response_format_text = [
-        'type' => 'text',
-        'text' => $bottext
-    ];
-} elseif($message->{"text"} == 'スタンプ'){
-    $response_format_text = [
-        'type' => 'sticker',
-        'packageId' => 2,
-        'stickerId' => 1
-    ];
-}else{
-    // それ以外は送られてきたテキストをオウム返し
-    $response_format_text = [
-        'type' => 'text',
-        //'text' => $message->{"text"}
-        'text' => 'ちょっとわかんないです3...'
-    ];
-}
+$post_data = [
+    "replyToken" => $reply_token,
+    //"messages" => [$response_format_text]
+    "messages" => $response_format_text
+];
+
+curl($post_data, $access_token);
+
+
+
+
+
+
+/*
 $messages_format_text2 = [
     [
         "type" => "text",
@@ -80,43 +124,14 @@ foreach ($messages_format_text2 as $key => $value){
     $i++;
 }
 
-
-$post_data = [
-    "replyToken" => $reply_token,
-    //"messages" => [$response_format_text]
-    "messages" => $messages_format_text
-];
+*/
 
 
-$response_format_text2 = [
-    'type' => 'text',
-    'text' => '2行目のテキストです。'
-];
 
-curl($post_data, $access_token);
-//curl($post_data, $access_token);
 
-push_message(
-    [
-        "to" => $group_id,
-        "messages" => [
-            [
-                "type" => "text",
-                "text" => "くん、誕生日おめでとう！"
-            ],
-            [
-                "type" => "sticker",
-                "packageId" => "1",
-                "stickerId" => "410"
-            ],
-            [
-                "type" => "sticker",
-                "packageId" => "4",
-                "stickerId" => "307"
-            ]
-        ]
-    ]
-);
+
+
+
 
 //@return array $csv_data csv配列
 function array_csv($csv_filepath) {
