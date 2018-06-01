@@ -26,7 +26,7 @@ try {
 } catch (Exception $e) {
     echo "error：", $e->getMessage(), "\n";
 }
-#cmd_flg = 0;
+$cmd_flg = 0;
 $charactor = "";
 $input_text_format = "";
 $flg = 0;
