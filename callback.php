@@ -54,7 +54,7 @@ if ($flg == 1) {
     $response_format_text = [
         'type' => 'text',
         //'text' => $message->{"text"}
-        'text' => 'ちょっとわかんないです...'
+        'text' => 'ちょっとわかんないです2...'
     ];
 }
 $post_data = [
