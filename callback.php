@@ -54,7 +54,7 @@ if ($flg == 1) {
     $response_format_text = [
         'type' => 'text',
         //'text' => $message->{"text"}
-        'text' => 'ちょっとわかんないです2...'
+        'text' => 'ちょっとわかんないです3...'
     ];
 }
 $post_data = [
@@ -70,7 +70,7 @@ $post_data2 = [
     "messages" => [$response_format_text2]
 ];
 curl($post_data, $access_token);
-curl($post_data2, $access_token);
+curl($post_data, $access_token);
 
 
 
