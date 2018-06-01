@@ -55,10 +55,10 @@ if ((strpos($message->{"text"},'#')) !== false) {
             $bottext .= "ガード：".$value[4] ."\n";
             $bottext .= "";
             $bottext .= "";
-            $bottext .= "です。";
+            $bottext .= "です。\n";
             $flg = 1;
             break;
-        }elseif(((strpos($value[0],$charactor)) !== false) & ((stripos($value[3],$input_text_format)) == 0)) {
+        }elseif(((strpos($value[0],$charactor)) !== false) & ((strpos($value[3],$input_text_format)) == 0)) {
             $bottext .= "【" .$value[0] ."】\n";
             $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
             $bottext .= "コマンド：".$value[3] ."\n";
@@ -68,7 +68,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
             $bottext .= "ガード：".$value[4] ."\n";
             $bottext .= "";
             $bottext .= "";
-            $bottext .= "です。";
+            $bottext .= "です。\n";
             $flg = 1;
 
         }
