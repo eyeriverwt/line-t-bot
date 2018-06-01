@@ -37,13 +37,57 @@ if ((strpos($message->{"text"},'#')) !== false) {
     $input_text = explode("#", $message->{"text"});
     $charactor = $input_text[0];
     $input_text_format = $input_text[1];
-    //$input_text_format = mb_convert_kana($input_text_format, 'a');
-
+    //$input_text_format = mb_convert_kana($input_text_format, 'a'); // errになる。。
     /*
     $input_text_format = mb_convert_kana($input_text[1], 'a');
     $input_text_format = str_replace('、', '', $input_text_format);
     $input_text_format = str_replace(' ', '', $input_text_format);
     */
+    //search
+    foreach ((array)$data['list'] as $key => $value) {
+        if ((strpos($charactor,$value[0])) !== false) {
+            $bottext .= "【" .$value[0] ."】\n";
+            $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
+            $bottext .= "コマンド：".$value[3] ."\n";
+            $bottext .= "判定：".$value[4] ."\n";
+            $bottext .= "ダメージ：".$value[4] ."\n";
+            $bottext .= "発生：".$value[4] ."\n";
+            $bottext .= "ガード：".$value[4] ."\n";
+            $bottext .= "";
+            $bottext .= "";
+            $bottext .= "です。";
+            $flg = 1;
+            break;
+        }
+    }
+
+    // 送られてきたメッセージからレスポンスのタイプを選択
+    if ($flg == 1) {
+        $response_format_text = [
+            'type' => 'text',
+            'text' => $bottext
+        ];
+    } elseif($message->{"text"} == 'スタンプ'){
+        $response_format_text = [
+            'type' => 'sticker',
+            'packageId' => 2,
+            'stickerId' => 1
+        ];
+    }else{
+        // それ以外は送られてきたテキストをオウム返し
+        $response_format_text = [
+            'type' => 'text',
+            //'text' => $message->{"text"}
+            'text' => 'ちょっとわかんないです＞＜...'
+        ];
+    }
+}else{
+    $response_format_text = [
+        [
+            "type" => "text",
+            "text" => "ちょっとわかんないです..."
+        ]
+    ];
 
 }
 /*
@@ -104,16 +148,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
 
 }
 */
-    $response_format_text = [
-        [
-            "type" => "text",
-            "text" => $charactor
-        ],
-        [
-            "type" => "text",
-            "text" => $input_text_format
-        ]
-    ];
+
 
 $post_data = [
     "replyToken" => $reply_token,
