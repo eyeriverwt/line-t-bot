@@ -44,8 +44,26 @@ if ((strpos($message->{"text"},'#')) !== false) {
     $input_text_format = str_replace(' ', '', $input_text_format);
     */
     //search
+    foreach ((array)$data['list'] as $key => $value) {
+        if (((strpos($charactor,$value[0])) !== false) & ((strpos($input_text_format,$value[1])) !== false)) {
+            /*
+             $bottext .= "【" .$value[0] ."】";
+             $bottext .= "技名：" .$value[1] ."（" .$value[2] ."）";
+             $bottext .= "コマンド：".$value[3] ."";
+             $bottext .= "判定：".$value[4] ."\n";
+             $bottext .= "ダメージ：".$value[4] ."";
+             $bottext .= "発生：".$value[4] ."\n";
+             $bottext .= "ガード：".$value[4] ."";
+             $bottext .= "";
+             $bottext .= "";
+             $bottext .= "です。";
+             */
 
-    $bottext = "です。";
+            $flg = 1;
+            break;
+        }
+    }
+
     // 送られてきたメッセージからレスポンスのタイプを選択
     if ($flg == 1) {
         $response_format_text = [
