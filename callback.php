@@ -49,21 +49,26 @@ if ((strpos($message->{"text"},'#')) !== false) {
     // 送られてきたメッセージからレスポンスのタイプを選択
     if ($flg == 1) {
         $response_format_text = [
+            [
             'type' => 'text',
             'text' => $bottext
+            ]
         ];
     } elseif($message->{"text"} == 'スタンプ'){
         $response_format_text = [
+             [
             'type' => 'sticker',
             'packageId' => 2,
             'stickerId' => 1
+             ]
         ];
     }else{
         // それ以外は送られてきたテキストをオウム返し
         $response_format_text = [
-            'type' => 'text',
-            //'text' => $message->{"text"}
-            'text' => 'ちょっとわかんないです＞＜...'
+            [
+                "type" => "text",
+                "text" => "ちょっとわかんないです＞＜..."
+            ]
         ];
     }
 }else{
