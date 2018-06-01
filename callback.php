@@ -58,7 +58,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
             $bottext .= "です。";
             $flg = 1;
             break;
-        }elseif(((strpos($charactor,$value[0])) !== false) & ((strripos($input_text_format,$value[1])) !== false)) {
+        }elseif(((strpos($charactor,$value[0])) !== false) & ((strripos($input_text_format,$value[3])) !== false)) {
             $bottext .= "【" .$value[0] ."】\n";
             $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
             $bottext .= "コマンド：".$value[3] ."\n";
