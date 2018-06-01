@@ -57,7 +57,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
             break;
         }
     }
-
+/*
     // 送られてきたメッセージからレスポンスのタイプを選択
     if ($flg == 1) {
         $response_format_text = [
@@ -86,6 +86,17 @@ if ((strpos($message->{"text"},'#')) !== false) {
         ]
     ];
 }
+*/
+    $response_format_text = [
+        [
+            "type" => "text",
+            "text" => $charactor
+        ],
+        [
+            "type" => "text",
+            "text" => $input_text_format
+        ]
+    ];
 
 $post_data = [
     "replyToken" => $reply_token,
