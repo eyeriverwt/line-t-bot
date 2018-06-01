@@ -14,7 +14,7 @@ $message = $json_obj->{"events"}[0]->{"message"};
 $reply_token = $json_obj->{"events"}[0]->{"replyToken"};
 
 // group_idの取得
-//$group_id =  $source->{"groupId"};
+$group_id =  $source->{"groupId"};
 
 $space_ignored = str_replace(" ", "", $message->{"text"} );
 $exploded = explode(",", $space_ignored);
@@ -72,7 +72,27 @@ $post_data2 = [
 curl($post_data, $access_token);
 curl($post_data, $access_token);
 
-
+push_message(
+    [
+        "to" => $group_id,
+        "messages" => [
+            [
+                "type" => "text",
+                "text" => "くん、誕生日おめでとう！"
+            ],
+            [
+                "type" => "sticker",
+                "packageId" => "1",
+                "stickerId" => "410"
+            ],
+            [
+                "type" => "sticker",
+                "packageId" => "4",
+                "stickerId" => "307"
+            ]
+            ]
+    ]
+);
 
 //@return array $csv_data csv配列
 function array_csv($csv_filepath) {
@@ -114,3 +134,21 @@ function curl($post_data, $access_token) {
     $result = curl_exec($ch);
     curl_close($ch);
 }
+
+// プッシュメッセージの送信
+function push_message($post_data) {
+    global $access_token;
+
+    $ch = curl_init("https://api.line.me/v2/bot/message/push");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json; charser=UTF-8',
+        'Authorization: Bearer ' . $access_token
+    ));
+    $result = curl_exec($ch);
+    curl_close($ch);
+}
+
