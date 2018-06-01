@@ -77,7 +77,7 @@ $messages_format_text = [
 $post_data = [
     "replyToken" => $reply_token,
     //"messages" => [$response_format_text]
-    "messages" => [$messages_format_text]
+    "messages" => $messages_format_text
 ];
 
 
