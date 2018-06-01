@@ -45,7 +45,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
     */
     //search
     foreach ((array)$data['list'] as $key => $value) {
-        if (((strpos($value[0],$charactor)) !== false) & ((strpos($value[1],$input_text_format)) !== false)) {
+        if (((strpos($value[0],$charactor)) !== false) && ((strpos($value[1],$input_text_format)) !== false)) {
             $bottext .= "【" .$value[0] ."】\n";
             $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
             $bottext .= "コマンド：".$value[3] ."\n";
@@ -58,19 +58,20 @@ if ((strpos($message->{"text"},'#')) !== false) {
             $bottext .= "です。\n";
             $flg = 1;
             break;
-        }elseif(((strpos($value[0],$charactor)) !== false) & ((strpos($value[3],$input_text_format)) == 0)) {
-            $bottext .= "【" .$value[0] ."】\n";
-            $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
-            $bottext .= "コマンド：".$value[3] ."\n";
-            $bottext .= "判定：".$value[4] ."\n";
-            $bottext .= "ダメージ：".$value[4] ."\n";
-            $bottext .= "発生：".$value[4] ."\n";
-            $bottext .= "ガード：".$value[4] ."\n";
-            $bottext .= "";
-            $bottext .= "";
-            $bottext .= "です。\n";
-            $flg = 1;
-
+        }elseif(((strpos($value[0],$charactor)) !== false) && ((strpos($value[3],mb_strtoupper($input_text_format))) !== false)) {
+            if(strpos($value[3],mb_strtoupper($input_text_format)) == 0){
+                $bottext .= "【" .$value[0] ."】\n";
+                $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
+                $bottext .= "コマンド：".$value[3] ."\n";
+                $bottext .= "判定：".$value[4] ."\n";
+                $bottext .= "ダメージ：".$value[4] ."\n";
+                $bottext .= "発生：".$value[4] ."\n";
+                $bottext .= "ガード：".$value[4] ."\n";
+                $bottext .= "";
+                $bottext .= "";
+                $bottext .= "です。\n";
+                $flg = 1;
+            }
         }
     }
 
