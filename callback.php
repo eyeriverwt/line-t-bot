@@ -93,6 +93,10 @@ if ((strpos($message->{"text"},'#')) !== false) {
         [
             "type" => "text",
             "text" => $charactor
+        ],
+        [
+            "type" => "text",
+            "text" => $input_text_format
         ]
     ];
 
