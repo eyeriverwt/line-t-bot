@@ -57,7 +57,7 @@ if ($flg == 1) {
         'text' => 'ちょっとわかんないです3...'
     ];
 }
-$messages_format_text = [
+$messages_format_text2 = [
     [
         "type" => "text",
         "text" => "くん、誕生日おめでとう！"
@@ -73,6 +73,13 @@ $messages_format_text = [
         "stickerId" => "307"
     ]
 ];
+$messages_format_text ="";
+$i =0;
+foreach ($messages_format_text2 as $key => $value){
+    $messages_format_text[$i][$key] = $value;
+    $i++;
+}
+
 
 $post_data = [
     "replyToken" => $reply_token,
