@@ -46,6 +46,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
     //search
     foreach ((array)$data['list'] as $key => $value) {
         if (((strpos($charactor,$value[0])) !== false) & ((strpos($input_text_format,$value[1])) !== false)) {
+            /*
             $bottext .= "【" .$value[0] ."】";
             $bottext .= "技名：" .$value[1] ."（" .$value[2] ."）";
             $bottext .= "コマンド：".$value[3] ."";
@@ -56,6 +57,8 @@ if ((strpos($message->{"text"},'#')) !== false) {
             $bottext .= "";
             $bottext .= "";
             $bottext .= "です。";
+            */
+            $bottext = "です。";
             $flg = 1;
             break;
         }
@@ -65,7 +68,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
     if ($flg == 1) {
         $response_format_text = [
             'type' => 'text',
-            'text' => $input_text_format
+            'text' => $bottext
         ];
     } elseif($message->{"text"} == 'スタンプ'){
         $response_format_text = [
