@@ -27,7 +27,7 @@ try {
     echo "error：", $e->getMessage(), "\n";
 }
 $cmd_flg = 0;
-$charactor = "";
+$charactor = "test1";
 $input_text_format = "test";
 $flg = 0;
 $bottext = "";
@@ -93,16 +93,11 @@ if ((strpos($message->{"text"},'#')) !== false) {
         [
             "type" => "text",
             "text" => $charactor
-        ],
-        [
-            "type" => "text",
-            "text" => $input_text_format
         ]
     ];
 
 $post_data = [
     "replyToken" => $reply_token,
-    //"messages" => [$response_format_text]
     "messages" => $response_format_text
 ];
 
