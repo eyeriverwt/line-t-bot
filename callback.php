@@ -65,7 +65,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
     if ($flg == 1) {
         $response_format_text = [
             'type' => 'text',
-            'text' => $bottext
+            'text' => $input_text_format
         ];
     } elseif($message->{"text"} == 'スタンプ'){
         $response_format_text = [
