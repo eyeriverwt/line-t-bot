@@ -70,7 +70,7 @@ if ((strpos($message->{"text"},'#')) !== false) {
             $bottext .= "";
             $bottext .= "です。";
             $flg = 1;
-            break;
+
         }
     }
 
