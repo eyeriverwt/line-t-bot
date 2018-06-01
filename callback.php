@@ -36,8 +36,8 @@ $bottext = "";
 if ((strpos($message->{"text"},'#')) !== false) {
     $input_text = explode("#", $message->{"text"});
     $charactor = $input_text[0];
-    //$input_text_format = $input_text[1];
-    $input_text_format = mb_convert_kana($input_text[1], 'a');
+    $input_text_format = $input_text[1];
+    $input_text_format = mb_convert_kana($input_text_format, 'a');
 
     /*
     $input_text_format = mb_convert_kana($input_text[1], 'a');
