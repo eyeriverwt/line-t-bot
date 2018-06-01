@@ -85,8 +85,9 @@ if ((strpos($message->{"text"},'#')) !== false) {
             "text" => "ちょっとわかんないです..."
         ]
     ];
-}
 */
+}
+
     $response_format_text = [
         [
             "type" => "text",
