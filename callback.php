@@ -1,9 +1,11 @@
 <?php
 /*
+
  *
  *
  * {date} {committer}[{author}]
  */
+
 require_once dirname(__FILE__) . '/config.php';
 //require_once dirname(__FILE__) . '/response_format_text.php';
 //require_once dirname(__FILE__) . '/curl.php';
@@ -55,9 +57,9 @@ if ((strpos($message->{"text"},'#')) !== false) {
             $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
             $bottext .= "コマンド：".$value[3] ."\n";
             $bottext .= "判定：".$value[4] ."\n";
-            $bottext .= "ダメージ：".$value[4] ."\n";
-            $bottext .= "発生：".$value[4] ."\n";
-            $bottext .= "ガード：".$value[4] ."\n";
+            $bottext .= "ダメージ：".$value[5] ."\n";
+            $bottext .= "発生：".$value[6] ."\n";
+            $bottext .= "ガード：".$value[7] ."\n";
             $bottext .= "";
             $bottext .= "";
             $bottext .= "です。\n";
@@ -69,9 +71,9 @@ if ((strpos($message->{"text"},'#')) !== false) {
                 $bottext .= "技名：".$value[1] ."（" .$value[2]."）\n";
                 $bottext .= "コマンド：".$value[3] ."\n";
                 $bottext .= "判定：".$value[4] ."\n";
-                $bottext .= "ダメージ：".$value[4] ."\n";
-                $bottext .= "発生：".$value[4] ."\n";
-                $bottext .= "ガード：".$value[4] ."\n";
+                $bottext .= "ダメージ：".$value[5] ."\n";
+                $bottext .= "発生：".$value[6] ."\n";
+                $bottext .= "ガード：".$value[7] ."\n";
                 $bottext .= "";
                 $bottext .= "";
                 $bottext .= "です。\n";
