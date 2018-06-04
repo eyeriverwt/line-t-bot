@@ -1,4 +1,9 @@
 <?php
+/*
+ *
+ *
+ * {date} {committer}[{author}]
+ */
 require_once dirname(__FILE__) . '/config.php';
 //require_once dirname(__FILE__) . '/response_format_text.php';
 //require_once dirname(__FILE__) . '/curl.php';
